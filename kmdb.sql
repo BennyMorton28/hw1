@@ -62,6 +62,8 @@
 --   to read data from multiple tables in each `SELECT` statement.
 --   Formatting does not matter.
 
+
+
 -- Submission
 -- 
 -- - "Use this template" to create a brand-new "hw1" repository in your
@@ -104,14 +106,17 @@
 .headers off
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
--- TODO!
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS actors;
+DROP TABLE IF EXISTS studios;
+DROP TABLE IF EXISTS movie_cast;
 
 -- Create new tables, according to your domain model
--- TODO!
+-- (done)
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
--- TODO!
+-- (done)
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -119,7 +124,11 @@
 .print ""
 
 -- The SQL statement for the movies output
--- TODO!
+SELECT movies.title, movies.release_year, movies.mpaa_rating, studios.name
+FROM movies
+JOIN studios ON movies.studio_id = studios.id;
+
+
 
 -- Prints a header for the cast output
 .print ""
@@ -129,4 +138,9 @@
 
 
 -- The SQL statement for the cast output
--- TODO!
+SELECT movies.title, actors.first_name || ' ' || actors.last_name AS actor_name, movie_cast.character_name
+FROM movie_cast
+JOIN movies ON movie_cast.movie_id = movies.id
+JOIN actors ON movie_cast.actor_id = actors.id;
+
+
